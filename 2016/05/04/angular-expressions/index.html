@@ -9,6 +9,7 @@
 
 使用 /{/{表达式/}/}
 使用ng-bind=&amp;quot;表达式&amp;quot;
+
 Angular表达式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angular_expressions">
@@ -18,14 +19,16 @@ Angular表达式">
 
 使用 /{/{表达式/}/}
 使用ng-bind=&amp;quot;表达式&amp;quot;
+
 Angular表达式">
-<meta property="og:updated_time" content="2016-05-04T14:16:17.637Z">
+<meta property="og:updated_time" content="2016-05-04T14:17:01.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular_expressions">
 <meta name="twitter:description" content="在Angularjs中的表达式有两种书写方式：
 
 使用 /{/{表达式/}/}
 使用ng-bind=&amp;quot;表达式&amp;quot;
+
 Angular表达式">
   
     <link rel="alternative" href="/atom.xml" title="openoter" type="application/atom+xml">
@@ -299,12 +302,11 @@ Angular表达式">
 <p>在Angularjs中的表达式有两种书写方式：</p>
 <ul>
 <li>使用 <code>/{/{表达式/}/}</code></li>
-<li><p>使用<code>ng-bind=&quot;表达式&quot;</code></p>
-<h2 id="Angular表达式"><a href="#Angular表达式" class="headerlink" title="Angular表达式"></a>Angular表达式</h2><a id="more"></a>
+<li>使用<code>ng-bind=&quot;表达式&quot;</code></li>
+</ul>
+<h2 id="Angular表达式"><a href="#Angular表达式" class="headerlink" title="Angular表达式"></a>Angular表达式</h2> <a id="more"></a>
 <p><the rest="" of="" contents="" |="" 余下全文=""></the></p>
 <h3 id="ng-app"><a href="#ng-app" class="headerlink" title="ng-app"></a>ng-app</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">ng-app</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../assets/plugins/angular/angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">&#123;&#123;"Hello world"&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
 <h3 id="ng-init"><a href="#ng-init" class="headerlink" title="ng-init"></a>ng-init</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">""</span> <span class="attr">ng-init</span>=<span class="string">"myCol='lightblue'"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"background-color:&#123;&#123;myCol&#125;&#125;"</span> <span class="attr">ng-model</span>=<span class="string">"myCol"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123;myCol&#125;&#125;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="Angularjs-Number"><a href="#Angularjs-Number" class="headerlink" title="Angularjs Number"></a>Angularjs Number</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">""</span> <span class="attr">ng-init</span>=<span class="string">"quantity=1;cost=5"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Total in dollar: &#123;&#123; quantity * cost &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>也可以使用<code>ng-bind</code>：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">""</span> <span class="attr">ng-init</span>=<span class="string">"quantity=1;cost=5"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Total in dollar: <span class="tag">&lt;<span class="name">span</span> <span class="attr">ng-bind</span>=<span class="string">"quantity * cost"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
@@ -323,7 +325,7 @@ Angular表达式">
         <p><span>本文标题:</span><a href="/2016/05/04/angular-expressions/">angular_expressions</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">openoter</a></p>
         <p><span>发布时间:</span>2016-05-04, 22:07:49</p>
-        <p><span>最后更新:</span>2016-05-04, 22:16:17</p>
+        <p><span>最后更新:</span>2016-05-04, 22:17:01</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/05/04/angular-expressions/" title="angular_expressions">openoter.github.io/2016/05/04/angular-expressions/</a>
             <span class="copy-path" data-clipboard-text="原文: openoter.github.io/2016/05/04/angular-expressions/　　作者: openoter" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
