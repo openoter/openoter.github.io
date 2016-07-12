@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="utf-8">
+  
+  <title>ContentProvider | openoter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 内容提供者介绍用于在不同的应用程序之间实现数据共享的功能。用法：
+
+使用现有的内容提供器来读取或操作相应程序中的数据（访问其他程序的数据）
+创建自己的内容提供器给我们的程序数据提供外部访问接口。（自己的数据提供给外部程序）2. 访问其他程序中的数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ContentProvider">
+<meta property="og:url" content="openoter.github.io/2016/07/12/ContentProvider/index.html">
+<meta property="og:site_name" content="openoter">
+<meta property="og:description" content="1. 内容提供者介绍用于在不同的应用程序之间实现数据共享的功能。用法：
+
+使用现有的内容提供器来读取或操作相应程序中的数据（访问其他程序的数据）
+创建自己的内容提供器给我们的程序数据提供外部访问接口。（自己的数据提供给外部程序）2. 访问其他程序中的数据">
+<meta property="og:updated_time" content="2016-07-12T15:02:46.931Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ContentProvider">
+<meta name="twitter:description" content="1. 内容提供者介绍用于在不同的应用程序之间实现数据共享的功能。用法：
+
+使用现有的内容提供器来读取或操作相应程序中的数据（访问其他程序的数据）
+创建自己的内容提供器给我们的程序数据提供外部访问接口。（自己的数据提供给外部程序）2. 访问其他程序中的数据">
+  
+    <link rel="alternative" href="/atom.xml" title="openoter" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  
+  
+      <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+          fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js"
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+  
+      <script>
+          var _hmt = _hmt || [];
+          (function() {
+              var hm = document.createElement("script");
+              hm.src = "//hm.baidu.com/hm.js?d8117376b206599ef19989cf1692b100";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+          })();
+      </script>
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">openoter</a></h1>
+        </hgroup>
+
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:openoter@gmail.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/openoter" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AR/">AR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Content-Provider/">Content Provider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DB/">DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript高级程序设计/">JavaScript高级程序设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/">SQLite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SharedPreferences/">SharedPreferences</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VR/">VR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基本概念/">基本概念</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">openoter</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">openoter</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:openoter@gmail.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/openoter" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-ContentProvider" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/12/ContentProvider/" class="article-date">
+      <time datetime="2016-07-12T14:59:48.000Z" itemprop="datePublished">2016-07-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ContentProvider
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Content-Provider/">Content Provider</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><excerpt in="" index="" |="" 首页摘要=""></excerpt></p>
+<h2 id="1-内容提供者介绍"><a href="#1-内容提供者介绍" class="headerlink" title="1. 内容提供者介绍"></a>1. 内容提供者介绍</h2><p>用于在不同的应用程序之间实现数据共享的功能。<br>用法：</p>
+<ul>
+<li>使用现有的内容提供器来读取或操作相应程序中的数据（访问其他程序的数据）</li>
+<li>创建自己的内容提供器给我们的程序数据提供外部访问接口。（自己的数据提供给外部程序）<h2 id="2-访问其他程序中的数据"><a href="#2-访问其他程序中的数据" class="headerlink" title="2. 访问其他程序中的数据"></a>2. 访问其他程序中的数据</h2><a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文=""><h3 id="2-1-ContentResolve的基本用法"><a href="#2-1-ContentResolve的基本用法" class="headerlink" title="2.1 ContentResolve的基本用法"></a>2.1 ContentResolve的基本用法</h3>步骤：</the></li>
+</ul>
+<ol>
+<li>获取<code>ContentResolve</code>实例（getContentResolver()）</li>
+<li>对数据进行CRUD（需接受Uri）</li>
+</ol>
+<p>Uri由两部分组成：权限、路径<br><strong>权限：</strong>用于对不同的应用程序做区分，一般采用程序包名的方式来命名。如： <code>com.example.app.provider</code><br><strong>路径：</strong>用于对同一应用程序中的不同表做区分，通常会添加到权限后面。如：<code>/table1</code>、<code>/table2</code></p>
+<p>内容URI最标准的格式写法：(URI字符串)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">content:<span class="comment">//com.example.app.provider/table1</span></span><br><span class="line">content:<span class="comment">//com.example.app.provider/table2</span></span><br></pre></td></tr></table></figure></p>
+<p>将<code>URI字符串</code>解析成<code>Uri对象</code>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uri uri = Uri.parse(<span class="string">"content://com.example.app.provider/table1"</span>)</span><br></pre></td></tr></table></figure></p>
+<p><strong>查询：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cursor cursor = getContentResolver.query(uri,projection,selection,selectionArg,sortOrder));</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>query()参数</th>
+<th>对应SQL部分</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uri</td>
+<td>from table_name</td>
+<td>某个应用程序中的某张表</td>
+</tr>
+<tr>
+<td>projection</td>
+<td>select col1,col2…</td>
+<td>查询的列名</td>
+</tr>
+<tr>
+<td>selection</td>
+<td>where column = value</td>
+<td>where条件约束</td>
+</tr>
+<tr>
+<td>selectionArg</td>
+<td>-</td>
+<td>为where占位符提供具体的值</td>
+</tr>
+<tr>
+<td>orderBy</td>
+<td>order by col1,col2…</td>
+<td>排序</td>
+</tr>
+</tbody>
+</table>
+<p>查询出来的数据仍人是一个Cursor对象，所以我们需要将数据意义的读取出来：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(cursor != <span class="keyword">null</span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(cursor.moveToNext())&#123;</span><br><span class="line">        String column1 = cursor.getString(cursor.getColumnIndex(<span class="string">"column1"</span>));</span><br><span class="line"><span class="keyword">int</span> column2 = cursor.getInt(cursor.getColumnIndex(<span class="string">"column2"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    cursor.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>添加：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//封装数据</span></span><br><span class="line">ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line">values.put(<span class="string">"Name"</span>, <span class="string">"Tom"</span>);</span><br><span class="line">values.put(<span class="string">"age"</span>, <span class="number">23</span>);</span><br><span class="line"><span class="comment">//添加数据</span></span><br><span class="line">getContentResolver().insert(uri, values);</span><br></pre></td></tr></table></figure></p>
+<p><strong>更新：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//封装数据</span></span><br><span class="line">ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line">values.put(<span class="string">"Name"</span>, <span class="string">"Jhon"</span>);</span><br><span class="line"><span class="comment">//添加数据</span></span><br><span class="line">getContentResolver().update(uri, values, <span class="string">"Name = ? and age = ?"</span>, <span class="keyword">new</span> String[]&#123;<span class="string">"Tom"</span>, <span class="string">"23"</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>删除：</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getContentResolver().delete(uri, <span class="string">"Name = ?"</span>, <span class="keyword">new</span> String[] &#123; <span class="string">"Jhon"</span> &#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-2-读取系统联系人"><a href="#2-2-读取系统联系人" class="headerlink" title="2.2 读取系统联系人"></a>2.2 读取系统联系人</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readContact</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Cursor cursor = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//查询所有的联系人</span></span><br><span class="line">            cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,</span><br><span class="line">                    <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">                    <span class="comment">//遍历联系人</span></span><br><span class="line">            <span class="keyword">while</span> (cursor.moveToNext()) &#123;</span><br><span class="line">                String Name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));</span><br><span class="line">                String phone = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));</span><br><span class="line">                list.add(<span class="string">"Name"</span>, Name);</span><br><span class="line">                list.add(<span class="string">"telephone"</span>, phone)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (cursor != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//关闭Cursor对象</span></span><br><span class="line">                cursor.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>注意,还得修改<code>AndroidManifest.xml</code>中的权限<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.READ_CONTACTS"</span> /&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="3-创建自己的内容提供器"><a href="#3-创建自己的内容提供器" class="headerlink" title="3. 创建自己的内容提供器"></a>3. 创建自己的内容提供器</h2><h3 id="3-1-创建内容提供器的步骤"><a href="#3-1-创建内容提供器的步骤" class="headerlink" title="3.1 创建内容提供器的步骤"></a>3.1 创建内容提供器的步骤</h3><ul>
+<li>新建一个类继承<code>ContentProvider</code>，并复写类中的六个方法</li>
+</ul>
+<p>对方法的说明：<br><strong>(1) onCreate()</strong><br>在初始化内容提供者时调用。通常用来完成数据库的创建和升级。<br><strong>Note：</strong>只有当ContentProvider尝试访问我们程序中的数据时，内容提供者才会被初始化。<br><strong>(2) query()</strong><br>从内容提供者中查询数据。查询的结果存放在<code>Cursor</code>中。<br><strong>(3) insert()</strong><br>向内容提供者中插入一条数据。添加完成后，返回一个用于表示这条数据记录的URI。<br><strong>(4) update()</strong><br>更新内容提供者的数据。更新完成后，受影响的行数将会被返回。<br><strong>(5) delete()</strong><br>从内容提供器中删除数据。<br><strong>(6) getType()</strong><br>根据传入的内容 URI 来返回相应的 MIME 类型。一个内容Uri所对应的MIME字符串主要由三个部分组成：</p>
+<ul>
+<li>必须以<code>vnd</code>开头</li>
+<li>如果内容URI以路径结尾，则后接<code>android.cursor.dir/</code>，如果内容以id结尾,后接<code>android.cursor.item/</code></li>
+<li>最后接上<code>vnd.&lt;authority&gt;.&lt;path&gt;</code><br>例如：<code>content://com.example.app.provider/table1</code>对应的MIME类型：<strong>vnd.android.cursor.dir/vnd.com.example.app.provider.table1</strong></li>
+</ul>
+<p><strong>补充：</strong><br>内容Uri的两种主要的书写方式：</p>
+<ul>
+<li><code>content://com.example.app.provider/table1</code>,表示的是com.example.app这个应用的table1表</li>
+<li><code>content://com.example.app.provider/table1/1</code>，表示com.example.app这个应用的table1表中id为1的数据</li>
+</ul>
+<p>Uri中通配符的使用：</p>
+<ul>
+<li><code>*</code>:content://com.example.app.provider/*，匹配任意表的内容 URI 格式</li>
+<li><code>#</code>:content://com.example.app.provider/table1/#，匹配 table1 表中任意一行数据的内容 URI 格式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyProvider</span> <span class="keyword">extends</span> <span class="title">ContentProvider</span> </span>&#123;</span><br><span class="line">    <span class="comment">//查询table1中的所有数据</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TABLE1_DIR = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//查询table1中的单条数据</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TABLE1_ITEM = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TABLE2_DIR = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TABLE2_ITEM = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> UriMatcher uriMatcher;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        uriMatcher = <span class="keyword">new</span> UriMatcher(UriMatcher.NO_MATCH);</span><br><span class="line">        uriMatcher.addURI(<span class="string">"com.example.ContentTest.provider"</span>, <span class="string">"table1"</span>, TABLE1_DIR);</span><br><span class="line">        uriMatcher.addURI(<span class="string">"com.example.ContentTest.provider"</span>, <span class="string">"table1/#"</span>, TABLE1_ITEM);</span><br><span class="line">        uriMatcher.addURI(<span class="string">"com.example.ContentTest.provider"</span>, <span class="string">"table2"</span>, TABLE2_DIR);</span><br><span class="line">        uriMatcher.addURI(<span class="string">"com.example.ContentTest.provider"</span>, <span class="string">"table2/#"</span>, TABLE2_ITEM);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Cursor <span class="title">query</span><span class="params">(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (uriMatcher.match(uri))&#123;</span><br><span class="line">            <span class="keyword">case</span> TABLE1_DIR:</span><br><span class="line">                <span class="comment">//查询table1中的所有数据</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> TABLE1_ITEM:</span><br><span class="line">                <span class="comment">//查询table1中的单条数据</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> TABLE2_DIR:</span><br><span class="line">                <span class="comment">//查询table2中的所有数据</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> TABLE2_ITEM:</span><br><span class="line">                <span class="comment">//查询table2中的单条数据</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 这个方法是必须的</span><br><span class="line">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getType</span><span class="params">(Uri uri)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (uriMatcher.match(uri))&#123;</span><br><span class="line">            <span class="keyword">case</span> TABLE1_DIR:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"vnd.android.cursor.dir/vnd.com.example.ContentTest.provider.table1"</span>;</span><br><span class="line">            <span class="keyword">case</span> TABLE1_ITEM:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"vnd.android.cursor.item/vnd.com.example.ContentTest.provider.table1"</span>;</span><br><span class="line">            <span class="keyword">case</span> TABLE2_DIR:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"vnd.android.cursor.dir/vnd.com.example.ContentTest.provider.table2"</span>;</span><br><span class="line">            <span class="keyword">case</span> TABLE2_ITEM:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"vnd.android.cursor.item/vnd.com.example.ContentTest.provider.table2"</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Uri <span class="title">insert</span><span class="params">(Uri uri, ContentValues values)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(Uri uri, String selection, String[] selectionArgs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(Uri uri, ContentValues values, String selection, String[] selectionArgs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-实现跨程序数据共享"><a href="#3-2-实现跨程序数据共享" class="headerlink" title="3.2 实现跨程序数据共享"></a>3.2 实现跨程序数据共享</h3><p>第一步：继承<code>ContentProvider</code>并实现其中的方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DatabaseProvider</span>  <span class="keyword">extends</span> <span class="title">ContentProvider</span> </span>&#123;</span><br><span class="line">    <span class="comment">//查询全部的数据</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BOOK_DIR = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//单行查询</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BOOK_ITEM = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CATEGORY_DIR = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CATEGORY_ITEM = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTHORITY = <span class="string">"com.example.DataSave.provider"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> UriMatcher uriMatcher;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> DatabaseHelper dbHelper;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        uriMatcher = <span class="keyword">new</span> UriMatcher(UriMatcher.NO_MATCH);</span><br><span class="line">        uriMatcher.addURI(AUTHORITY, <span class="string">"book"</span>, BOOK_DIR);</span><br><span class="line">        uriMatcher.addURI(AUTHORITY, <span class="string">"book/#"</span>, BOOK_ITEM);</span><br><span class="line">        uriMatcher.addURI(AUTHORITY, <span class="string">"category"</span>, CATEGORY_DIR);</span><br><span class="line">        uriMatcher.addURI(AUTHORITY, <span class="string">"category/#"</span>, CATEGORY_ITEM);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        dbHelper = <span class="keyword">new</span> DatabaseHelper(getContext(), <span class="string">"BookStore.db"</span>, <span class="keyword">null</span>, <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Cursor <span class="title">query</span><span class="params">(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        SQLiteDatabase db = dbHelper.getReadableDatabase();</span><br><span class="line">        Cursor cursor = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">switch</span> (uriMatcher.match(uri))&#123;</span><br><span class="line">            <span class="keyword">case</span> BOOK_DIR:</span><br><span class="line">                cursor = db.query(<span class="string">"Book"</span>, projection,selection, selectionArgs, <span class="keyword">null</span>, <span class="keyword">null</span>,sortOrder);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> BOOK_ITEM:</span><br><span class="line">                String bookId = uri.getPathSegments().get(<span class="number">1</span>);</span><br><span class="line">                cursor = db.query(<span class="string">"Book"</span>, projection, <span class="string">"id=?"</span>, <span class="keyword">new</span> String[]&#123;bookId&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, sortOrder);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CATEGORY_DIR:</span><br><span class="line">                cursor = db.query(<span class="string">"Category"</span>, projection,selection, selectionArgs, <span class="keyword">null</span>, <span class="keyword">null</span>,sortOrder);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CATEGORY_ITEM:</span><br><span class="line">                String categoryId = uri.getPathSegments().get(<span class="number">1</span>);</span><br><span class="line">                cursor = db.query(<span class="string">"Category"</span>, projection, <span class="string">"id=?"</span>, <span class="keyword">new</span> String[]&#123;categoryId&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, sortOrder);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cursor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getType</span><span class="params">(Uri uri)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (uriMatcher.match(uri))&#123;</span><br><span class="line">            <span class="keyword">case</span> BOOK_DIR:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"vnd.android.cursor.dir/vnd.com.example.DataSave.provider.book"</span>;</span><br><span class="line">            <span class="keyword">case</span> BOOK_ITEM:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"vnd.android.cursor.item/vnd.com.example.DataSave.provider.book"</span>;</span><br><span class="line">            <span class="keyword">case</span> CATEGORY_DIR:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"vnd.android.cursor.dir/vnd.com.example.DataSave.provider.category"</span>;</span><br><span class="line">            <span class="keyword">case</span> CATEGORY_ITEM:</span><br><span class="line">                <span class="keyword">return</span> <span class="string">"vnd.android.cursor.item/vnd.com.example.DataSave.provider.category"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Uri <span class="title">insert</span><span class="params">(Uri uri, ContentValues values)</span> </span>&#123;</span><br><span class="line">        SQLiteDatabase db = dbHelper.getWritableDatabase();</span><br><span class="line">        Uri uriReturn = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (uriMatcher.match(uri))&#123;</span><br><span class="line">            <span class="keyword">case</span> BOOK_DIR:</span><br><span class="line">            <span class="keyword">case</span> BOOK_ITEM:</span><br><span class="line">                <span class="keyword">long</span> newBookId = db.insert(<span class="string">"Book"</span>, <span class="keyword">null</span>, values);</span><br><span class="line">                uriReturn = Uri.parse(<span class="string">"content://"</span>+AUTHORITY+<span class="string">"book/"</span>+newBookId);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CATEGORY_DIR:</span><br><span class="line">            <span class="keyword">case</span> CATEGORY_ITEM:</span><br><span class="line">                <span class="keyword">long</span> newCategoryId = db.insert(<span class="string">"Category"</span>, <span class="keyword">null</span>, values);</span><br><span class="line">                uriReturn =  Uri.parse(<span class="string">"content://"</span>+AUTHORITY+<span class="string">"category/"</span>+newCategoryId);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uriReturn;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(Uri uri, String selection, String[] selectionArgs)</span> </span>&#123;</span><br><span class="line">        SQLiteDatabase db = dbHelper.getWritableDatabase();</span><br><span class="line">        <span class="keyword">int</span> deleteRows = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">switch</span> (uriMatcher.match(uri))&#123;</span><br><span class="line">            <span class="keyword">case</span> BOOK_DIR:</span><br><span class="line">                deleteRows = db.delete(<span class="string">"Book"</span>, selection, selectionArgs );</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> BOOK_ITEM:</span><br><span class="line">                String bookId = uri.getPathSegments().get(<span class="number">1</span>);</span><br><span class="line">                deleteRows = db.delete(<span class="string">"Book"</span>, <span class="string">"id=?"</span>, <span class="keyword">new</span> String[]&#123;bookId&#125;);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CATEGORY_DIR:</span><br><span class="line">                deleteRows = db.delete(<span class="string">"Category"</span>,selection, selectionArgs );</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CATEGORY_ITEM:</span><br><span class="line">                String categoryId = uri.getPathSegments().get(<span class="number">1</span>);</span><br><span class="line">                deleteRows = db.delete(<span class="string">"Category"</span>, <span class="string">"id=?"</span>, <span class="keyword">new</span> String[]&#123;categoryId&#125;);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> deleteRows;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(Uri uri, ContentValues values, String selection, String[] selectionArgs)</span> </span>&#123;</span><br><span class="line">        SQLiteDatabase db = dbHelper.getWritableDatabase();</span><br><span class="line">        <span class="keyword">int</span> updateRows = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">switch</span> (uriMatcher.match(uri))&#123;</span><br><span class="line">            <span class="keyword">case</span> BOOK_DIR:</span><br><span class="line">                updateRows = db.update(<span class="string">"Book"</span>,values,selection, selectionArgs );</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> BOOK_ITEM:</span><br><span class="line">                String bookId = uri.getPathSegments().get(<span class="number">1</span>);</span><br><span class="line">                updateRows = db.update(<span class="string">"Book"</span>, values, <span class="string">"id=?"</span>, <span class="keyword">new</span> String[]&#123;bookId&#125;);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CATEGORY_DIR:</span><br><span class="line">                updateRows = db.update(<span class="string">"Category"</span>,values,selection, selectionArgs );</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CATEGORY_ITEM:</span><br><span class="line">                String categoryId = uri.getPathSegments().get(<span class="number">1</span>);</span><br><span class="line">                updateRows = db.update(<span class="string">"Category"</span>, values, <span class="string">"id=?"</span>, <span class="keyword">new</span> String[]&#123;categoryId&#125;);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> updateRows;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第二步：权限注册<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line">&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"</span><br><span class="line">...</span><br><span class="line">    &lt;application android:label="@string/app_name" android:icon="@drawable/ic_launcher"&gt;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        &lt;provider</span><br><span class="line">                android:name=".DatabaseProvider"</span><br><span class="line">                android:authorities="com.example.DataSave.provider" &gt;</span><br><span class="line">        &lt;/provider&gt;</span><br><span class="line">    &lt;/application&gt;</span><br><span class="line">&lt;/manifest&gt;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/12/ContentProvider/">ContentProvider</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">openoter</a></p>
+        <p><span>发布时间:</span>2016-07-12, 22:59:48</p>
+        <p><span>最后更新:</span>2016-07-12, 23:02:46</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/12/ContentProvider/" title="ContentProvider">openoter.github.io/2016/07/12/ContentProvider/</a>
+            <span class="copy-path" data-clipboard-text="原文: openoter.github.io/2016/07/12/ContentProvider/　　作者: openoter" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/07/Android数据持久化/">
+                    Android数据持久化
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-内容提供者介绍"><span class="toc-number">1.</span> <span class="toc-text">1. 内容提供者介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-访问其他程序中的数据"><span class="toc-number">2.</span> <span class="toc-text">2. 访问其他程序中的数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-ContentResolve的基本用法"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 ContentResolve的基本用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-读取系统联系人"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 读取系统联系人</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-创建自己的内容提供器"><span class="toc-number">3.</span> <span class="toc-text">3. 创建自己的内容提供器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-创建内容提供器的步骤"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 创建内容提供器的步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-实现跨程序数据共享"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 实现跨程序数据共享</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+    <style>
+        .toc {
+            white-space: nowrap;
+            overflow-x: hidden;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $(".toc li a").mouseover(function() {
+                var title = $(this).find('.toc-text').text();
+                $(this).attr("title", title);
+            });
+        })
+    </script>
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"ContentProvider　| openoter　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/07/12/ContentProvider/" data-title="ContentProvider" data-url="openoter.github.io/2016/07/12/ContentProvider/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"openoter"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/07/Android数据持久化/" title="下一篇: Android数据持久化">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/ContentProvider/">ContentProvider</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Android数据持久化/">Android数据持久化</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/angular-module/">Anlularjs Modules</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/angular-expressions/">angular_expressions</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/27/javascript-basic/">JavaScript基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/22/AR-VR/">AR-VR</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/SQLite数据库/">SQLite数据库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/hexo初步/">使用Hexo</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 openoter
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+    <script src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
