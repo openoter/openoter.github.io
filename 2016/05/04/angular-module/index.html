@@ -127,13 +127,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -286,13 +286,13 @@
           
         <hr>
 <p><excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
-<h2 id="创建一个模块"><a href="#创建一个模块" class="headerlink" title="创建一个模块"></a>创建一个模块</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"myApp"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line">        <span class="keyword">var</span> app = angular.module(<span class="string">"myApp"</span>, []);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="创建一个模块"><a href="#创建一个模块" class="headerlink" title="创建一个模块"></a>创建一个模块</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"myApp"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span><br><span class="line">        var app = angular.module("myApp", []);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><code>[]</code>被用来定义相关的依赖模块。如果没有<code>[]</code>参数是不能创建新的模块的。<br> <a id="more"></a></p>
 <p><the rest="" of="" contents="" |="" 余下全文=""><br>上面的<code>myApp</code>表示HTML元素中的一个。<br>现在我们可以在我们的应用中添加控制器、指令、过滤器等。</the></p>
-<h2 id="添加一个控制器"><a href="#添加一个控制器" class="headerlink" title="添加一个控制器"></a>添加一个控制器</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"myApp"</span> <span class="attr">ng-controller</span>=<span class="string">"myCtrl"</span>&gt;</span></span><br><span class="line">        Name: &#123;&#123;name&#125;&#125;; Age: &#123;&#123;age&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line">        <span class="comment">//创建一个模块</span></span><br><span class="line">        <span class="keyword">var</span> app = angular.module(<span class="string">"myApp"</span>, []);</span><br><span class="line">        <span class="comment">//添加一个控制器</span></span><br><span class="line">        app.controller(<span class="string">"myCtrl"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>)</span>&#123;</span><br><span class="line">            $scope.name = <span class="string">"Jack"</span>;</span><br><span class="line">            $scope.age = <span class="number">12</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span><br><span class="line">    结果为：  Name: Jack; Age: 12</span><br><span class="line">    --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="添加一个控制器"><a href="#添加一个控制器" class="headerlink" title="添加一个控制器"></a>添加一个控制器</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"myApp"</span> <span class="attr">ng-controller</span>=<span class="string">"myCtrl"</span>&gt;</span></span><br><span class="line">        Name: &#123;&#123;name&#125;&#125;; Age: &#123;&#123;age&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span><br><span class="line">        //创建一个模块</span><br><span class="line">        var app = angular.module("myApp", []);</span><br><span class="line">        //添加一个控制器</span><br><span class="line">        app.controller("myCtrl", function($scope)&#123;</span><br><span class="line">            $scope.name = "Jack";</span><br><span class="line">            $scope.age = 12;</span><br><span class="line">        &#125;);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span><br><span class="line">    结果为：  Name: Jack; Age: 12</span><br><span class="line">    --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </blockquote>
-<h2 id="添加一个指令"><a href="#添加一个指令" class="headerlink" title="添加一个指令"></a>添加一个指令</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"testDev"</span> <span class="attr">w3-test-directive</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line">        <span class="keyword">var</span> app = angular.module(<span class="string">"testDev"</span>, []);</span><br><span class="line">        app.directive(<span class="string">"w3TestDirective"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                template : <span class="string">"I was made in a directive constructor!"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span><br><span class="line">    结果为： I was made in a directive constructor!</span><br><span class="line">    --&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="添加一个指令"><a href="#添加一个指令" class="headerlink" title="添加一个指令"></a>添加一个指令</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">"testDev"</span> <span class="attr">w3-test-directive</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span><br><span class="line">        var app = angular.module("testDev", []);</span><br><span class="line">        app.directive("w3TestDirective", function()&#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                template : "I was made in a directive constructor!"</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--</span><br><span class="line">    结果为： I was made in a directive constructor!</span><br><span class="line">    --&gt;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -301,17 +301,17 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/05/04/angular-module/">Anlularjs Modules</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">openoter</a></p>
-        <p><span>发布时间:</span>2016-05-04, 23:19:43</p>
-        <p><span>最后更新:</span>2016-05-04, 23:21:13</p>
+        <p><span>Title:</span><a href="/2016/05/04/angular-module/">Anlularjs Modules</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">openoter</a></p>
+        <p><span>Created:</span>2016-05-04, 23:19:43</p>
+        <p><span>Updated:</span>2016-05-04, 23:21:13</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/05/04/angular-module/" title="Anlularjs Modules">openoter.github.io/2016/05/04/angular-module/</a>
-            <span class="copy-path" data-clipboard-text="原文: openoter.github.io/2016/05/04/angular-module/　　作者: openoter" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2016/05/04/angular-module/" title="Anlularjs Modules">openoter.github.io/2016/05/04/angular-module/</a>
+            <span class="copy-path" data-clipboard-text="From openoter.github.io/2016/05/04/angular-module/　　By openoter" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
         </p>
     </div>
 
@@ -338,7 +338,7 @@
 </article>
 
     <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
+    <strong class="toc-title">Contents</strong>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个模块"><span class="toc-number">1.</span> <span class="toc-text">创建一个模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加一个控制器"><span class="toc-number">2.</span> <span class="toc-text">添加一个控制器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加一个指令"><span class="toc-number">3.</span> <span class="toc-text">添加一个指令</span></a></li></ol>
 </div>
 <style>
@@ -350,10 +350,10 @@
     }
 </style>
 
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
 <script>
-    var valueHide = "隐藏目录";
-    var valueShow = "显示目录";
+    var valueHide = "Hide";
+    var valueShow = "Show";
 
     if ($(".left-col").is(":hidden")) {
         $("#tocButton").attr("value", valueShow);
@@ -452,15 +452,15 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/07/07/Android数据持久化/" title="上一篇: Android数据持久化">
+            <a href="/2016/07/07/Android数据持久化/" title="Pre: Android数据持久化">
                 <i class="fa fa-angle-left"></i>
             </a>
         
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/05/04/angular-expressions/" title="下一篇: angular_expressions">
+            <a href="/2016/05/04/angular-expressions/" title="Next: angular_expressions">
                 <i class="fa fa-angle-right"></i>
             </a>
         
@@ -482,14 +482,14 @@
                 &copy; 2016 openoter
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo">Yelee</a> by MOxFIVE
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
+                        <span id="site-visit" >Site Visitors: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
@@ -499,7 +499,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
+                        <span id="page-visit">Page Hits: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
@@ -532,9 +532,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 
     <script src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
