@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="utf-8">
+  
+  <title>手机多媒体 | openoter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. 使用通知（Notification）1.1 通知的基本用法步骤：
+
+创建NotificationManager对通知进行管理（getSystemService()得到）
+创建一个Notification对象（用于存储通知所需的各种信息）
+对通知栏的布局进行设定
+调用notify()显示通知">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手机多媒体">
+<meta property="og:url" content="openoter.github.io/2016/07/16/手机多媒体/index.html">
+<meta property="og:site_name" content="openoter">
+<meta property="og:description" content="1. 使用通知（Notification）1.1 通知的基本用法步骤：
+
+创建NotificationManager对通知进行管理（getSystemService()得到）
+创建一个Notification对象（用于存储通知所需的各种信息）
+对通知栏的布局进行设定
+调用notify()显示通知">
+<meta property="og:updated_time" content="2016-07-15T17:38:08.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手机多媒体">
+<meta name="twitter:description" content="1. 使用通知（Notification）1.1 通知的基本用法步骤：
+
+创建NotificationManager对通知进行管理（getSystemService()得到）
+创建一个Notification对象（用于存储通知所需的各种信息）
+对通知栏的布局进行设定
+调用notify()显示通知">
+  
+    <link rel="alternative" href="/atom.xml" title="openoter" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  
+  
+      <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
+  
+  
+      <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+      <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.9/clipboard.min.js"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+          fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+          scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.0.9/scrollreveal.min.js"
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+  
+      <script>
+          var _hmt = _hmt || [];
+          (function() {
+              var hm = document.createElement("script");
+              hm.src = "//hm.baidu.com/hm.js?d8117376b206599ef19989cf1692b100";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+          })();
+      </script>
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">openoter</a></h1>
+        </hgroup>
+
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:openoter@gmail.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/openoter" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AR/">AR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Angular/">Angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Content-Provider/">Content Provider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DB/">DB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript高级程序设计/">JavaScript高级程序设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/">SQLite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SharedPreferences/">SharedPreferences</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VR/">VR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基本概念/">基本概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多媒体/">多媒体</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">openoter</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">openoter</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:openoter@gmail.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/openoter" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-手机多媒体" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/16/手机多媒体/" class="article-date">
+      <time datetime="2016-07-15T17:36:18.000Z" itemprop="datePublished">2016-07-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      手机多媒体
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多媒体/">多媒体</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><excerpt in="" index="" |="" 首页摘要=""> </excerpt></p>
+<h2 id="1-使用通知（Notification）"><a href="#1-使用通知（Notification）" class="headerlink" title="1. 使用通知（Notification）"></a>1. 使用通知（Notification）</h2><h3 id="1-1-通知的基本用法"><a href="#1-1-通知的基本用法" class="headerlink" title="1.1 通知的基本用法"></a>1.1 通知的基本用法</h3><p>步骤：</p>
+<ul>
+<li>创建<code>NotificationManager</code>对通知进行管理（getSystemService()得到）</li>
+<li>创建一个<code>Notification</code>对象（用于存储通知所需的各种信息）</li>
+<li>对通知栏的布局进行设定</li>
+<li><p>调用<code>notify()</code>显示通知</p>
+<a id="more"></a>
+<p><the rest="" of="" contents="" |="" 余下全文=""><br>行到手机上<br>即真机测试。</the></p>
+<h3 id="3-2-调用摄像头拍照"><a href="#3-2-调用摄像头拍照" class="headerlink" title="3.2 调用摄像头拍照"></a>3.2 调用摄像头拍照</h3><p>步骤：</p>
+</li>
+</ul>
+<p><strong>拍照：</strong></p>
+<ul>
+<li>创建File对象，用于存储拍照后的图片</li>
+<li>将file对象转换成Uri对象</li>
+<li>使用Intent调用相机</li>
+<li>启动相机程序</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TAKE_PHOTO = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CROP_PHOTO = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Button take_photo;</span><br><span class="line">    <span class="keyword">private</span> ImageView pic;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Uri imageUri;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line">        take_photo = (Button) findViewById(R.id.take_photo);</span><br><span class="line">        pic = (ImageView) findViewById(R.id.picture);</span><br><span class="line">        take_photo.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// 创建File对象，用于存储拍照后的图片（Environment.getExternalStorageDirectory()获取手机的根目录）</span></span><br><span class="line">                File outputImage = <span class="keyword">new</span> File(Environment.</span><br><span class="line">                        getExternalStorageDirectory(), <span class="string">"tempImage.jpg"</span>);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (outputImage.exists()) &#123;</span><br><span class="line">                        outputImage.delete();</span><br><span class="line">                    &#125;</span><br><span class="line">                    outputImage.createNewFile();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">//将file对象转换成Uri对象image_capture</span></span><br><span class="line">                imageUri = Uri.fromFile(outputImage);</span><br><span class="line">                Intent intent = <span class="keyword">new</span> Intent(<span class="string">"android.media.action.IMAGE_CAPTURE"</span>);</span><br><span class="line">                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);</span><br><span class="line">                <span class="comment">// 启动相机程序（拍完照后会有结果返回到onActivityResult()中去）</span></span><br><span class="line">                startActivityForResult(intent, TAKE_PHOTO);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (requestCode)&#123;</span><br><span class="line">            <span class="keyword">case</span> TAKE_PHOTO:</span><br><span class="line">                <span class="comment">//拍照成功</span></span><br><span class="line">                <span class="keyword">if</span> (resultCode == RESULT_OK)&#123;</span><br><span class="line">                    <span class="comment">//对照片进行裁剪</span></span><br><span class="line">                    Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.android.camera.action.CROP"</span>);</span><br><span class="line">                    intent.setDataAndType(imageUri, <span class="string">"image/*"</span>);</span><br><span class="line">                    intent.putExtra(<span class="string">"scale"</span>, <span class="keyword">true</span>);</span><br><span class="line">                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);</span><br><span class="line">                    <span class="comment">// 启动裁剪程序</span></span><br><span class="line">                    startActivityForResult(intent, CROP_PHOTO);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> CROP_PHOTO:</span><br><span class="line">                <span class="comment">//裁剪成功</span></span><br><span class="line">                <span class="keyword">if</span> (resultCode == RESULT_OK)&#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        <span class="comment">//将图片解析成Bitmap对象</span></span><br><span class="line">                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));</span><br><span class="line">                        pic.setImageBitmap(bitmap);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-从相册中选择照片"><a href="#3-3-从相册中选择照片" class="headerlink" title="3.3 从相册中选择照片"></a>3.3 从相册中选择照片</h3><p>步骤：</p>
+<ul>
+<li>创建File对象，用于存储选择的照片</li>
+<li>将file对象转换成Uri对象</li>
+<li>构建Intent并指定action，设置必须的参数</li>
+<li>打开相册程序</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">chooseFromAlbum.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建File对象，用于存储选择的照片</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(Environment.getExternalStorageDirectory(), <span class="string">"out.jpg"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(file.exists())&#123;</span><br><span class="line">            file.delete();</span><br><span class="line">        &#125;</span><br><span class="line">            file.createNewFile();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将file对象转换成Uri对象</span></span><br><span class="line">        imageUri = Uri.fromFile(file);</span><br><span class="line">        <span class="comment">//构建Intent并指定action</span></span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(<span class="string">"android.intent.action.GET_CONTENT"</span>);</span><br><span class="line">        intent.setType(<span class="string">"image/*"</span>);</span><br><span class="line">        <span class="comment">//是否允许裁剪</span></span><br><span class="line">        intent.putExtra(<span class="string">"crop"</span>, <span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//是否允许缩放</span></span><br><span class="line">        intent.putExtra(<span class="string">"scale"</span>, <span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//图片的位置</span></span><br><span class="line">        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);</span><br><span class="line">        <span class="comment">//打开相册程序</span></span><br><span class="line">        startActivityForResult(intent, CROP_PHOTO);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="4-播放多媒体文件"><a href="#4-播放多媒体文件" class="headerlink" title="4. 播放多媒体文件"></a>4. 播放多媒体文件</h2><h3 id="4-1-播放音频"><a href="#4-1-播放音频" class="headerlink" title="4.1 播放音频"></a>4.1 播放音频</h3><p>音乐播放一般都使用<code>MediaPlayer</code>类，下面列出了<code>MediaPlayer</code>类一些常用的方法：<br>|方法名|功能描述|<br>|—-|—|<br>|setDataSource()|设置要播放的音频文件的位置|<br>|prepare()|开始播放之前调用这个方法完成准备工作|<br>|start()|开始或继续播放音频|<br>|pause()|暂停播放音频|<br>|reset()|将 MediaPlayer 对象重置到刚刚创建的状态|<br>|seekTo()|从停止的位置开始播放音频|<br>|stop()|停止播放音频，调用这个方法后MediaPlayer对象无法再播放音频|<br>|release()|释放掉与MediaPlayer对象相关的资源|<br>|isPlaying()|判断当前 MediaPlayer 是否正在播放音频|<br>|getDuration()|获取载入的音频文件的时长|</p>
+<p><strong>步骤：</strong></p>
+<ul>
+<li>创建MediaPlayer 对象</li>
+<li>调用setDataSource()方法来设置音频文件的路径</li>
+<li>再调用prepare()方法准备</li>
+<li>start()方法开始播放</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Button play;</span><br><span class="line">    <span class="keyword">private</span> Button pause;</span><br><span class="line">    <span class="keyword">private</span> Button stop;</span><br><span class="line">    <span class="comment">//创建mediaPlayer实例</span></span><br><span class="line">    <span class="keyword">private</span> MediaPlayer mediaPlayer = <span class="keyword">new</span> MediaPlayer();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line">        findViews();</span><br><span class="line">        initEvent();</span><br><span class="line">        <span class="comment">//初始化播放器</span></span><br><span class="line">        initMediaPlayer();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initMediaPlayer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//创建文件对象</span></span><br><span class="line">            File file = <span class="keyword">new</span> File(Environment.getExternalStorageDirectory(),</span><br><span class="line">                <span class="string">"music.mp3"</span>);</span><br><span class="line">                <span class="comment">//设置文件的源</span></span><br><span class="line">            mediaPlayer.setDataSource(file.getPath());</span><br><span class="line">            <span class="comment">//准备</span></span><br><span class="line">            mediaPlayer.prepare();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initEvent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        play.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">        pause.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">        stop.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">findViews</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        play = (Button) findViewById(R.id.play);</span><br><span class="line">        pause = (Button) findViewById(R.id.pause);</span><br><span class="line">        stop = (Button) findViewById(R.id.stop);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (v.getId())&#123;</span><br><span class="line">            <span class="keyword">case</span> R.id.play:</span><br><span class="line">            <span class="comment">//播放</span></span><br><span class="line">                <span class="keyword">if</span>(!mediaPlayer.isPlaying())&#123;</span><br><span class="line">                    mediaPlayer.start();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> R.id.pause:</span><br><span class="line">            <span class="comment">//暂停</span></span><br><span class="line">                <span class="keyword">if</span>(mediaPlayer.isPlaying())&#123;</span><br><span class="line">                    mediaPlayer.pause();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> R.id.stop:</span><br><span class="line">            <span class="comment">//停止</span></span><br><span class="line">                <span class="keyword">if</span>(mediaPlayer.isPlaying())&#123;</span><br><span class="line">                    mediaPlayer.reset();</span><br><span class="line">                    initMediaPlayer();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        <span class="keyword">if</span>(mediaPlayer != <span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="comment">//停止播放音频</span></span><br><span class="line">            mediaPlayer.stop();</span><br><span class="line">            <span class="comment">//释放掉与MediaPlayer对象相关的资源</span></span><br><span class="line">            mediaPlayer.release();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-播放视频"><a href="#4-2-播放视频" class="headerlink" title="4.2 播放视频"></a>4.2 播放视频</h3><p>视频播放一般都使用<code>VideoView</code>类，下面列出了<code>VideoView</code>类一些常用的方法：<br>|方法名|功能描述|<br>|—-|—|<br>|setVideoPath()|设置要播放视频文件的位置|<br>|start()|开始或继续播放视频|<br>|pause()|暂停播放视频|<br>|resume()|将视频重头开始播放|<br>|seekTo()|从指定的位置开始播放视频|<br>|isPlaying()|判断当前是否正在播放视频|<br>|getDuration()|获取载入的视频文件的时长|</p>
+<p>使用的方法与””类似：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> VideoView videoView;</span><br><span class="line">    <span class="keyword">private</span> Button play;</span><br><span class="line">    <span class="keyword">private</span> Button pause;</span><br><span class="line">    <span class="keyword">private</span> Button replay;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line">        findViews();</span><br><span class="line">        initEvent();</span><br><span class="line">        initVideo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initVideo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(Environment.getExternalStorageDirectory(), <span class="string">"m.mp4"</span>);</span><br><span class="line">        videoView.setVideoPath(file.getPath());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initEvent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        play.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">        pause.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">        replay.setOnClickListener(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">findViews</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        videoView = (VideoView) findViewById(R.id.video_view);</span><br><span class="line">        play = (Button) findViewById(R.id.play);</span><br><span class="line">        pause = (Button) findViewById(R.id.pause);</span><br><span class="line">        replay = (Button) findViewById(R.id.replay);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (v.getId())&#123;</span><br><span class="line">            <span class="keyword">case</span>  R.id.play:</span><br><span class="line">                <span class="keyword">if</span>(!videoView.isPlaying())&#123;</span><br><span class="line">                    videoView.start(); <span class="comment">//开始播放</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> R.id.pause:</span><br><span class="line">                <span class="keyword">if</span>(videoView.isPlaying())&#123;</span><br><span class="line">                    videoView.pause(); <span class="comment">//暂停</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> R.id.replay:</span><br><span class="line">                <span class="keyword">if</span>(videoView.isPlaying())&#123;</span><br><span class="line">                    videoView.resume(); <span class="comment">//重播</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        <span class="keyword">if</span>(videoView != <span class="keyword">null</span>)&#123;</span><br><span class="line">            videoView.suspend();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>main.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span><br><span class="line">    <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span></span><br><span class="line">    <span class="attr">android:layout_height</span>=<span class="string">"fill_parent"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">VideoView</span></span><br><span class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/video_view"</span></span><br><span class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span><br><span class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span><br><span class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span></span><br><span class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/play"</span></span><br><span class="line">                <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></span><br><span class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">                <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></span><br><span class="line">                <span class="attr">android:text</span>=<span class="string">"Play"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span></span><br><span class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/pause"</span></span><br><span class="line">                <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></span><br><span class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">                <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></span><br><span class="line">                <span class="attr">android:text</span>=<span class="string">"Pause"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span></span><br><span class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/replay"</span></span><br><span class="line">                <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></span><br><span class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span><br><span class="line">                <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></span><br><span class="line">                <span class="attr">android:text</span>=<span class="string">"Replay"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/16/手机多媒体/">手机多媒体</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">openoter</a></p>
+        <p><span>发布时间:</span>2016-07-16, 01:36:18</p>
+        <p><span>最后更新:</span>2016-07-16, 01:38:08</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/16/手机多媒体/" title="手机多媒体">openoter.github.io/2016/07/16/手机多媒体/</a>
+            <span class="copy-path" data-clipboard-text="原文: openoter.github.io/2016/07/16/手机多媒体/　　作者: openoter" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/12/ContentProvider/">
+                    ContentProvider
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-使用通知（Notification）"><span class="toc-number">1.</span> <span class="toc-text">1. 使用通知（Notification）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-通知的基本用法"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 通知的基本用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-调用摄像头拍照"><span class="toc-number">1.2.</span> <span class="toc-text">3.2 调用摄像头拍照</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-从相册中选择照片"><span class="toc-number">1.3.</span> <span class="toc-text">3.3 从相册中选择照片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-播放多媒体文件"><span class="toc-number">2.</span> <span class="toc-text">4. 播放多媒体文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-播放音频"><span class="toc-number">2.1.</span> <span class="toc-text">4.1 播放音频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-播放视频"><span class="toc-number">2.2.</span> <span class="toc-text">4.2 播放视频</span></a></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+    <style>
+        .toc {
+            white-space: nowrap;
+            overflow-x: hidden;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $(".toc li a").mouseover(function() {
+                var title = $(this).find('.toc-text').text();
+                $(this).attr("title", title);
+            });
+        })
+    </script>
+
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <li id="bds_twi"><a href="#" class="bds_twi" data-cmd="twi" title="分享到推特"></a></li>
+            <li id="bds_tsina"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></li>
+            <li id="bds_sqq"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a></li>
+            <li id="bds_copy"><a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a></li>
+            <li id="bds_mail"><a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a></li>
+            <li id="bds_weixin"><a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a></li>
+            <li id="bds_more"><a href="#" class="bds_more" data-cmd="more"></i></a></li>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"手机多媒体　| openoter　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/07/16/手机多媒体/" data-title="手机多媒体" data-url="openoter.github.io/2016/07/16/手机多媒体/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"openoter"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/12/ContentProvider/" title="下一篇: ContentProvider">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/16/手机多媒体/">手机多媒体</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/12/ContentProvider/">ContentProvider</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/07/Android数据持久化/">Android数据持久化</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/angular-module/">Anlularjs Modules</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/angular-expressions/">angular_expressions</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/27/javascript-basic/">JavaScript基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/22/AR-VR/">AR-VR</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/SQLite数据库/">SQLite数据库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/hexo初步/">使用Hexo</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 openoter
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+    <script src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
